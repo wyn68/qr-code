@@ -18,6 +18,7 @@ export default function App() {
   const [isDark, setIsDark] = useState(false);
   const [isPayRoute, setIsPayRoute] = useState(false);
   const [payData, setPayData] = useState({ w: "", a: "", q: "" });
+  const [payEnv, setPayEnv] = useState<"wechat" | "alipay" | "qq" | "browser" | null>(null);
   
   // Customization state
   const [fgColor, setFgColor] = useState("#000000");
@@ -31,15 +32,18 @@ export default function App() {
       const q = params.get("q") || "";
       const ua = navigator.userAgent.toLowerCase();
       
+      setPayData({ w, a, q });
+      setIsPayRoute(true);
+
       if (ua.includes("micromessenger") && w) {
-        window.location.href = w;
+        setPayEnv("wechat");
       } else if (ua.includes("alipay") && a) {
+        setPayEnv("alipay");
         window.location.href = a;
-      } else if (ua.includes("qq/") && q) {
-        window.location.href = q;
+      } else if (ua.match(/qq\//i) && q) {
+        setPayEnv("qq");
       } else {
-        setPayData({ w, a, q });
-        setIsPayRoute(true);
+        setPayEnv("browser");
       }
     }
   }, []);
@@ -211,6 +215,63 @@ END:VCARD`;
   };
 
   if (isPayRoute) {
+    if (payEnv === "wechat" && payData.w) {
+      return (
+        <div className="min-h-screen bg-muted/30 flex flex-col items-center justify-center p-4 transition-colors">
+          <Card className="w-full max-w-sm p-8 space-y-6 text-center shadow-lg border-none flex flex-col items-center">
+            <div className="font-bold text-2xl text-green-600 flex items-center justify-center gap-2">
+              <Wallet className="w-7 h-7" /> 微信支付
+            </div>
+            <div className="p-3 bg-white rounded-xl shadow-sm border inline-block">
+              <QRCodeSVG value={payData.w} size={220} />
+            </div>
+            <div className="space-y-2">
+              <p className="text-lg font-medium text-foreground">请长按上方二维码</p>
+              <p className="text-sm text-muted-foreground">识别二维码进行付款</p>
+            </div>
+          </Card>
+        </div>
+      );
+    }
+
+    if (payEnv === "alipay" && payData.a) {
+      return (
+        <div className="min-h-screen bg-muted/30 flex flex-col items-center justify-center p-4 transition-colors">
+          <Card className="w-full max-w-sm p-8 space-y-6 text-center shadow-lg border-none flex flex-col items-center">
+            <div className="font-bold text-2xl text-blue-500 flex items-center justify-center gap-2">
+              <Wallet className="w-7 h-7" /> 支付宝
+            </div>
+            <div className="p-3 bg-white rounded-xl shadow-sm border inline-block">
+              <QRCodeSVG value={payData.a} size={220} />
+            </div>
+            <div className="space-y-2">
+              <p className="text-lg font-medium text-foreground">正在唤起支付宝...</p>
+              <p className="text-sm text-muted-foreground">如果没有自动跳转，请长按识别二维码或保存图片后在支付宝中打开</p>
+            </div>
+          </Card>
+        </div>
+      );
+    }
+
+    if (payEnv === "qq" && payData.q) {
+      return (
+        <div className="min-h-screen bg-muted/30 flex flex-col items-center justify-center p-4 transition-colors">
+          <Card className="w-full max-w-sm p-8 space-y-6 text-center shadow-lg border-none flex flex-col items-center">
+            <div className="font-bold text-2xl text-red-500 flex items-center justify-center gap-2">
+              <Wallet className="w-7 h-7" /> QQ钱包
+            </div>
+            <div className="p-3 bg-white rounded-xl shadow-sm border inline-block">
+              <QRCodeSVG value={payData.q} size={220} />
+            </div>
+            <div className="space-y-2">
+              <p className="text-lg font-medium text-foreground">请长按上方二维码</p>
+              <p className="text-sm text-muted-foreground">识别二维码进行付款</p>
+            </div>
+          </Card>
+        </div>
+      );
+    }
+
     return (
       <div className="min-h-screen bg-muted/30 p-4 md:p-8 font-sans text-foreground flex flex-col items-center justify-center transition-colors">
         <Card className="w-full max-w-md p-6 space-y-6 text-center shadow-lg border-none">
