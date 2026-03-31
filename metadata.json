@@ -1,0 +1,5 @@
+{
+  "name": "屿宁二维码生成器",
+  "description": "轻松创建、自定义并下载二维码。支持网址、文本、名片、Wi-Fi以及多码合一收款码。",
+  "requestFramePermissions": []
+}
