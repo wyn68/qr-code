@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Link, Type, Contact, Wifi, Image as ImageIcon, Download, Settings, Palette, Moon, Sun, Wallet } from "lucide-react";
+import { Link, Type, Contact, Wifi, Image as ImageIcon, Download, Settings, Palette, Moon, Sun, Wallet, Github } from "lucide-react";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("url");
@@ -322,9 +322,16 @@ END:VCARD`;
             <h1 className="text-3xl font-bold tracking-tight">屿宁二维码生成器</h1>
             <p className="text-muted-foreground mt-1">轻松创建、自定义并下载二维码。支持多码合一收款码。</p>
           </div>
-          <Button variant="ghost" size="icon" onClick={() => setIsDark(!isDark)}>
-            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" asChild>
+              <a href="https://github.com/wyn68/qr-code" target="_blank" rel="noopener noreferrer">
+                <Github className="h-5 w-5" />
+              </a>
+            </Button>
+            <Button variant="ghost" size="icon" onClick={() => setIsDark(!isDark)}>
+              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+          </div>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -2,19 +2,108 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# 屿宁二维码生成器
 
-This contains everything you need to run your app locally.
+一个功能强大、易于使用的二维码生成工具，支持多种二维码类型和自定义选项。
 
-View your app in AI Studio: https://ai.studio/apps/0c2e842b-f802-47c7-97d3-bf50fa8b86d5
+## 功能特性
 
-## Run Locally
+- **多种二维码类型**：
+  - 网址链接
+  - 纯文本
+  - 电子名片 (VCARD)
+  - Wi-Fi 网络配置
+  - 多码合一收款码（支持微信、支付宝、QQ钱包）
 
-**Prerequisites:**  Node.js
+- **丰富的自定义选项**：
+  - 前景色和背景色调整
+  - 边距大小设置
+  - 容错率选择
+  - 自定义 Logo 图片
 
+- **其他特性**：
+  - 实时预览
+  - 一键下载 PNG 格式
+  - 深色/浅色主题切换
+  - 响应式设计，支持移动端
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 技术栈
+
+- React 19.0.0
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui 组件库
+- qrcode.react (二维码生成)
+- jsqr (二维码识别)
+
+## 快速开始
+
+### 前提条件
+
+- Node.js 18+
+
+### 安装和运行
+
+1. 克隆项目：
+   ```bash
+   git clone https://github.com/wyn68/qr-code.git
+   cd qr-code
+   ```
+
+2. 安装依赖：
+   ```bash
+   npm install
+   ```
+
+3. 运行开发服务器：
+   ```bash
+   npm run dev
+   ```
+
+4. 构建生产版本：
+   ```bash
+   npm run build
+   ```
+
+## 使用说明
+
+1. **选择二维码类型**：在左侧面板选择要生成的二维码类型（网址、文本、名片、Wi-Fi、收款）
+
+2. **输入内容**：根据选择的类型填写相应的内容
+
+3. **自定义样式**：调整颜色、边距、容错率等参数，可选择添加 Logo
+
+4. **预览效果**：右侧面板实时显示二维码效果
+
+5. **下载使用**：点击"下载 PNG"按钮保存二维码图片
+
+### 多码合一收款码使用
+
+1. 上传微信、支付宝或 QQ 收款码图片
+2. 系统会自动识别收款码内容
+3. 生成一个统一的二维码
+4. 用户扫码时会根据所在 App 自动跳转到对应支付页面
+
+## 项目结构
+
+```
+├── components/      # UI 组件
+├── lib/             # 工具函数
+├── src/             # 源代码
+│   ├── App.tsx      # 主应用
+│   ├── index.css    # 全局样式
+│   └── main.tsx     # 入口文件
+├── .env.example     # 环境变量示例
+├── README.md        # 项目说明
+├── package.json     # 项目配置
+└── vite.config.ts   # Vite 配置
+```
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request 来改进这个项目！
+
+## 许可证
+
+MIT License
