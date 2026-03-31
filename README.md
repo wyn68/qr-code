@@ -1,7 +1,3 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
 # 屿宁二维码生成器
 
 一个功能强大、易于使用的二维码生成工具，支持多种二维码类型和自定义选项。
